@@ -12,4 +12,10 @@ public class HelloWorld {
     public String hello() {
         return "Hello World";
     }
+
+    @RequestMapping("nome")
+    @ResponseBody
+    public String metodoQueDevolveNome() {
+        return "Bruno Pinho";
+    }
 }
