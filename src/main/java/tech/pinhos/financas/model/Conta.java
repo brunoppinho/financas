@@ -19,6 +19,10 @@ public class Conta {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Transacao> transacoes;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "titular_id", referencedColumnName = "id", nullable = false)
+    private Pessoa titular;
+
     public Long getId() {
         return id;
     }
@@ -41,5 +45,13 @@ public class Conta {
 
     public void setTransacoes(List<Transacao> transacoes) {
         this.transacoes = transacoes;
+    }
+
+    public Pessoa getTitular() {
+        return titular;
+    }
+
+    public void setTitular(Pessoa titular) {
+        this.titular = titular;
     }
 }
