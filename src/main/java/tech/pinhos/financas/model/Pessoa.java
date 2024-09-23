@@ -13,7 +13,7 @@ public class Pessoa {
     @Column
     private String nome;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Column
