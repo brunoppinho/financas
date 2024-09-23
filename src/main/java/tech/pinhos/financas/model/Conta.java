@@ -17,7 +17,6 @@ public class Conta {
     private BigDecimal saldo;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "conta_id")
     private List<Transacao> transacoes;
 
     public Long getId() {

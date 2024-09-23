@@ -26,6 +26,10 @@ public class Transacao {
     @Column(name = "tipo", nullable = false)
     private TipoTransacao tipo;
 
+    @ManyToOne
+    @JoinColumn(name = "conta_id")
+    private Conta conta;
+
     public Long getId() {
         return id;
     }
@@ -64,5 +68,13 @@ public class Transacao {
 
     public void setTipo(TipoTransacao tipo) {
         this.tipo = tipo;
+    }
+
+    public Conta getConta() {
+        return conta;
+    }
+
+    public void setConta(Conta conta) {
+        this.conta = conta;
     }
 }
