@@ -1,7 +1,8 @@
 package tech.pinhos.financas.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import tech.pinhos.financas.model.Pessoa;
+import tech.pinhos.financas.dto.PessoaDTO;
 import tech.pinhos.financas.service.BuscarPessoaService;
 import tech.pinhos.financas.service.CriarPessoaService;
 
@@ -20,12 +21,12 @@ public class PessoaController {
     }
 
     @GetMapping()
-    public List<Pessoa> listar() {
+    public List<PessoaDTO> listar() {
         return buscarPessoaService.buscarTodas();
     }
 
     @PostMapping()
-    public Pessoa criarPessoa(@RequestBody Pessoa pessoa) {
+    public PessoaDTO criarPessoa(@Valid @RequestBody PessoaDTO pessoa) {
         return criarPessoaService.executar(pessoa);
     }
 }
