@@ -25,6 +25,11 @@ public class PessoaController {
         return buscarPessoaService.buscarTodas();
     }
 
+    @GetMapping("uf/{uf}")
+    public List<PessoaDTO> listarPorUf(@PathVariable String uf) {
+        return buscarPessoaService.buscarPessoasPorUf(uf);
+    }
+
     @PostMapping()
     public PessoaDTO criarPessoa(@Valid @RequestBody PessoaDTO pessoa) {
         return criarPessoaService.executar(pessoa);

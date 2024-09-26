@@ -30,4 +30,13 @@ public class BuscarPessoaService {
                 .map(pessoaMapper::toDto)
                 .toList();
     }
+
+    public List<PessoaDTO> buscarPessoasPorUf(String cidade) {
+        return pessoaRepository
+//                .findByUf(cidade)
+                .findByUfNativa(cidade)
+                .stream()
+                .map(pessoaMapper::toDto)
+                .toList();
+    }
 }
