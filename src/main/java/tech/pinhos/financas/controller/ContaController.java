@@ -1,11 +1,14 @@
 package tech.pinhos.financas.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tech.pinhos.financas.model.Conta;
+import tech.pinhos.financas.model.Pessoa;
 import tech.pinhos.financas.model.TipoTransacao;
 import tech.pinhos.financas.model.Transacao;
 import tech.pinhos.financas.repository.ContaRepository;
+import tech.pinhos.financas.service.AbrirContaService;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,7 +20,10 @@ import java.util.Random;
 public class ContaController {
 
     @Autowired
-    ContaRepository contaRepository;
+    private ContaRepository contaRepository;
+
+    @Autowired
+    private AbrirContaService abrirContaService;
 
     // Método 1: Usando @RequestParam para buscar conta pelo ID
     @GetMapping("buscar")
@@ -46,5 +52,10 @@ public class ContaController {
     @GetMapping()
     public List<Conta> getContas() {
         return contaRepository.findAll();
+    }
+
+    @PostMapping("abrir")
+    public Conta getContas(@Valid @RequestBody String cpf) {
+        return abrirContaService.executar(cpf);
     }
 }
