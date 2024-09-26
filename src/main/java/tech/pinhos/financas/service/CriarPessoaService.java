@@ -13,13 +13,14 @@ public class CriarPessoaService {
     private final PessoaRepository pessoaRepository;
     private final PessoaMapper pessoaMapper;
 
-    public CriarPessoaService(PessoaRepository pessoaRepository) {
+    public CriarPessoaService(PessoaRepository pessoaRepository, PessoaMapper pessoaMapper) {
         this.pessoaRepository = pessoaRepository;
-        this.pessoaMapper = Mappers.getMapper(PessoaMapper.class);
+        this.pessoaMapper = pessoaMapper;
     }
 
     /**
      * Método para criar uma pessoa, usando o mapstruct
+     *
      * @param pessoa
      * @return
      */
@@ -31,17 +32,19 @@ public class CriarPessoaService {
 
     /**
      * Método para criar uma pessoa, usando o Model Mapper
+     *
      * @param pessoa
      * @return
      */
     public PessoaDTO executar2(PessoaDTO pessoa) {
         var entity = PessoaModelMapper.toEntity(pessoa);
         entity = pessoaRepository.save(entity);
-                return PessoaModelMapper.toDto(entity);
+        return PessoaModelMapper.toDto(entity);
     }
 
     /**
      * Método para criar uma pessoa, metodos no DTO
+     *
      * @param pessoa
      * @return
      */

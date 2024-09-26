@@ -5,7 +5,7 @@ import org.mapstruct.factory.Mappers;
 import tech.pinhos.financas.dto.PessoaDTO;
 import tech.pinhos.financas.model.Pessoa;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface PessoaMapper {
 
     PessoaMapper INSTANCE = Mappers.getMapper(PessoaMapper.class);
