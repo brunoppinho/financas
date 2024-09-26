@@ -22,6 +22,10 @@ public class Pessoa {
     @Column
     private String telefone;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id", nullable = false)
+    private Endereco endereco;
+
     public String getNome() {
         return nome;
     }
@@ -52,5 +56,13 @@ public class Pessoa {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

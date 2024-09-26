@@ -1,9 +1,7 @@
 package tech.pinhos.financas.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
 import tech.pinhos.financas.model.Pessoa;
 
@@ -25,6 +23,10 @@ public class PessoaDTO {
     private String telefone;
 
     private String provedorEmail;
+
+    @Valid
+    @NotNull(message = "É necessário um endereço com CEP e complemento.")
+    private EnderecoDTO endereco;
 
     public PessoaDTO(String nome, String cpf, String email, String telefone) {
         this.nome = nome;
@@ -82,6 +84,13 @@ public class PessoaDTO {
         return provedorEmail;
     }
 
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
+    }
     public Pessoa toEntity() {
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(this.nome);

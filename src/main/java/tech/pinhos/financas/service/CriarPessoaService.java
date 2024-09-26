@@ -1,6 +1,5 @@
 package tech.pinhos.financas.service;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 import tech.pinhos.financas.dto.PessoaDTO;
 import tech.pinhos.financas.mapper.PessoaMapper;
@@ -12,10 +11,12 @@ public class CriarPessoaService {
 
     private final PessoaRepository pessoaRepository;
     private final PessoaMapper pessoaMapper;
+    private final CriarEnderecoService criarEnderecoService;
 
-    public CriarPessoaService(PessoaRepository pessoaRepository, PessoaMapper pessoaMapper) {
+    public CriarPessoaService(PessoaRepository pessoaRepository, PessoaMapper pessoaMapper, CriarEnderecoService criarEnderecoService) {
         this.pessoaRepository = pessoaRepository;
         this.pessoaMapper = pessoaMapper;
+        this.criarEnderecoService = criarEnderecoService;
     }
 
     /**
@@ -26,6 +27,7 @@ public class CriarPessoaService {
      */
     public PessoaDTO executar(PessoaDTO pessoa) {
         var entity = pessoaMapper.toEntity(pessoa);
+        entity.setEndereco(criarEnderecoService.executar(pessoa.getEndereco()));
         entity = pessoaRepository.save(entity);
         return pessoaMapper.toDto(entity);
     }
@@ -38,6 +40,7 @@ public class CriarPessoaService {
      */
     public PessoaDTO executar2(PessoaDTO pessoa) {
         var entity = PessoaModelMapper.toEntity(pessoa);
+        entity.setEndereco(criarEnderecoService.executar(pessoa.getEndereco()));
         entity = pessoaRepository.save(entity);
         return PessoaModelMapper.toDto(entity);
     }
@@ -50,6 +53,7 @@ public class CriarPessoaService {
      */
     public PessoaDTO executar3(PessoaDTO pessoa) {
         var entity = pessoa.toEntity();
+        entity.setEndereco(criarEnderecoService.executar(pessoa.getEndereco()));
         entity = pessoaRepository.save(entity);
         return PessoaDTO.fromEntity(entity);
     }

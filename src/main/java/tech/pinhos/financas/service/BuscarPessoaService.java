@@ -2,6 +2,7 @@ package tech.pinhos.financas.service;
 
 import org.springframework.stereotype.Service;
 import tech.pinhos.financas.dto.PessoaDTO;
+import tech.pinhos.financas.mapper.PessoaMapper;
 import tech.pinhos.financas.repository.PessoaRepository;
 
 import java.util.List;
@@ -11,20 +12,22 @@ import java.util.Optional;
 public class BuscarPessoaService {
 
     private final PessoaRepository pessoaRepository;
+    private final PessoaMapper pessoaMapper;
 
-    public BuscarPessoaService(PessoaRepository pessoaRepository) {
+    public BuscarPessoaService(PessoaRepository pessoaRepository, PessoaMapper pessoaMapper) {
         this.pessoaRepository = pessoaRepository;
+        this.pessoaMapper = pessoaMapper;
     }
 
     public Optional<PessoaDTO> buscarPessoaPorCpf(String cpf) {
-        return pessoaRepository.findPessoaByCpf(cpf).map(PessoaDTO::fromEntity);
+        return pessoaRepository.findPessoaByCpf(cpf).map(pessoaMapper::toDto);
     }
 
     public List<PessoaDTO> buscarTodas() {
         return pessoaRepository
                 .findAll()
                 .stream()
-                .map(PessoaDTO::fromEntity)
+                .map(pessoaMapper::toDto)
                 .toList();
     }
 }
