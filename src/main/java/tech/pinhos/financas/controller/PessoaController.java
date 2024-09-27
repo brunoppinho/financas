@@ -1,6 +1,8 @@
 package tech.pinhos.financas.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import tech.pinhos.financas.dto.PessoaDTO;
 import tech.pinhos.financas.dto.PessoaRequestDTO;
@@ -22,8 +24,8 @@ public class PessoaController {
     }
 
     @GetMapping()
-    public List<PessoaDTO> listar() {
-        return buscarPessoaService.buscarTodas();
+    public Page<PessoaDTO> listar(Pageable pageable) {
+        return buscarPessoaService.buscarPaginada(pageable);
     }
 
     @GetMapping("uf/{uf}")

@@ -1,5 +1,7 @@
 package tech.pinhos.financas.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import tech.pinhos.financas.dto.PessoaDTO;
 import tech.pinhos.financas.mapper.PessoaMapper;
@@ -29,6 +31,12 @@ public class BuscarPessoaService {
                 .stream()
                 .map(pessoaMapper::toDto)
                 .toList();
+    }
+
+    public Page<PessoaDTO> buscarPaginada(Pageable pageable) {
+        return pessoaRepository
+                .findAll(pageable)
+                .map(pessoaMapper::toDto);
     }
 
     public List<PessoaDTO> buscarPessoasPorUf(String cidade) {
