@@ -2,7 +2,7 @@ package tech.pinhos.financas.service;
 
 import org.springframework.stereotype.Service;
 import tech.pinhos.financas.dto.CepDTO;
-import tech.pinhos.financas.dto.EnderecoDTO;
+import tech.pinhos.financas.dto.EnderecoRequestDTO;
 import tech.pinhos.financas.gateway.CepGateway;
 import tech.pinhos.financas.model.Endereco;
 import tech.pinhos.financas.repository.EnderecoRepository;
@@ -18,7 +18,7 @@ public class CriarEnderecoService {
         this.cepGateway = cepGateway;
     }
 
-    public Endereco executar(EnderecoDTO endereco) {
+    public Endereco executar(EnderecoRequestDTO endereco) {
         Endereco end = preencheDadosViaCep(endereco.getCep());
         end.setComplemento(endereco.getComplemento());
 

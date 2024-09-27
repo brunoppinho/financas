@@ -3,6 +3,7 @@ package tech.pinhos.financas.controller;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import tech.pinhos.financas.dto.PessoaDTO;
+import tech.pinhos.financas.dto.PessoaRequestDTO;
 import tech.pinhos.financas.service.BuscarPessoaService;
 import tech.pinhos.financas.service.CriarPessoaService;
 
@@ -31,7 +32,7 @@ public class PessoaController {
     }
 
     @PostMapping()
-    public PessoaDTO criarPessoa(@Valid @RequestBody PessoaDTO pessoa) {
+    public PessoaDTO criarPessoa(@Valid @RequestBody PessoaRequestDTO pessoa) {
         return criarPessoaService.executar(pessoa);
     }
 }
